@@ -52,36 +52,39 @@ const Jobs = (props) => {
 
 
     return (
-        <SafeAreaView>
-            <Text style={{ fontSize: 20, fontWeight: 'bold', alignSelf: 'center' }}>Jobs for {selectedLang}</Text>
-            <FlatList
-                data={data}
-                renderItem={renderItem}
-                keyExtractor={(_, index) => index.toString()}
-            />
-            <TouchableOpacity
-                style={{
-                    backgroundColor: 'lightblue',
-                    borderRadius: 8,
-                    padding: 8,
-                    position: 'absolute'
-                    
-                }}
-                onPress={() => props.navigation.navigate("SavedJobs")}
-            >
-                <Text style={{ color: 'white'}}>Bookmarks</Text>
-            </TouchableOpacity>
-            <Modal isVisible={isModalVisible} onBackdropPress={() => setModalVisible(false)}>
-                <View style={jobs.container}>
-                    <View style={{ borderBottomWidth: 1, margin: 5 }}>
-                        <Text style={jobs.text}>{selectedJob.title}</Text>
-                        <Text>{selectedJob.company}</Text>
-                        <Text>{selectedJob.type} / {selectedJob.location}</Text>
+        <SafeAreaView style={{ flex: 1 }}>
+            <View style={{flex:1}}>
+                <Text style={{ fontSize: 20, fontWeight: 'bold', alignSelf: 'center', margin: 10 }}>Jobs for {selectedLang}</Text>
+                <FlatList
+                    data={data}
+                    renderItem={renderItem}
+                    keyExtractor={(_, index) => index.toString()}
+                />
+                <TouchableOpacity
+                    style={{
+                        backgroundColor: '#5fc9f8',
+                        borderRadius: 8,
+                        padding: 8,
+                        position: 'absolute',
+                        right: 10,
+                        bottom: 10
+                    }}
+                    onPress={() => props.navigation.navigate("SavedJobs")}
+                >
+                    <Text style={{ color: 'white', fontWeight: 'bold' }}>Bookmarks</Text>
+                </TouchableOpacity>
+                <Modal isVisible={isModalVisible} onBackdropPress={() => setModalVisible(false)}>
+                    <View style={jobs.container}>
+                        <View style={{ borderBottomWidth: 1, margin: 5 }}>
+                            <Text style={jobs.text}>{selectedJob.title}</Text>
+                            <Text>{selectedJob.company}</Text>
+                            <Text>{selectedJob.type} / {selectedJob.location}</Text>
+                        </View>
+                        <Text numberOfLines={5}>{selectedJob.description}</Text>
+                        <Button title="Add a Bookmark" onPress={addBookmark} />
                     </View>
-                    <Text numberOfLines={5}>{selectedJob.description}</Text>
-                    <Button title="Add a Bookmark" onPress={addBookmark} />
-                </View>
-            </Modal>
+                </Modal>
+            </View>
         </SafeAreaView>
     )
 }
